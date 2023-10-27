@@ -1,0 +1,59 @@
+texto = '''No meio do caminho tinha uma pedra
+tinha uma pedra no meio do caminho
+tinha uma pedra no meio do caminho tinha uma pedra.
+'''
+
+# Remove caracteres especiais e transforma todas as letras em minúsculas
+texto = texto.lower().replace(".", "").replace(",", "").replace(":", "").replace(";", "").replace("!", "").replace("?", "").replace("-", "")
+
+# Separa o texto em uma lista de palavras
+palavras = texto.split()
+
+print('Lista... \n')
+print(palavras)
+print()
+
+# Cria um dicionário para armazenar a contagem de cada palavra
+contagem = {}
+
+#
+# CRIE O DICIONÁRIO CONTAGEM AQUI ----------------------------------------------
+#
+for palavra in palavras:
+    if palavra in contagem:
+        contagem[palavra] += 1
+    else:
+        contagem[palavra] = 1
+
+#
+#-------------------------------------------------------------------------------
+#
+
+# Imprime a contagem de cada palavra
+print('contagem... \n')
+print(contagem)
+
+
+
+from wordcloud import WordCloud
+import matplotlib.pyplot as plt
+
+def my_wordcloud(contagem):
+  wordcloud = WordCloud(width = 800, height = 800, 
+                  background_color ='white', 
+                  max_words=200,
+                  min_font_size = 10).generate_from_frequencies(contagem)
+
+  plt.figure(figsize = (5, 5), facecolor = None) 
+  plt.imshow(wordcloud) 
+  plt.axis("off") 
+  plt.tight_layout(pad = 0) 
+    
+  plt.show()
+  return
+
+contagem = {'amor': 3, 'meio': 1, 'do': 2, 'caminho': 3, 'paz': 4, 'uma': 1, 'pedra': 4}
+
+my_wordcloud(contagem)
+
+
